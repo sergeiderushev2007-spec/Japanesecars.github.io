@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="RUS">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактив</title>
+    <link rel="icon" href="C:\Users\User\Desktop\Сайт\Итоговы сайт\sports-car_18438758.png" sizes="32x32">
+    <link href="body.css" rel="stylesheet">
+</head>
+<body>
+     <a href="C:\Users\User\Desktop\Сайт\Итоговы сайт\main.html"><img class="img1" src="C:\Users\User\Desktop\Сайт\Итоговы сайт\img\Снимок экрана 2025-11-13 213850.png" alt="Вернутся на главную страницу" width="100" height=auto></a><br>
+     <h1>Выберите машину</h1>
+    
+    <select id="carSelect">
+        <option value=""> Выберите </option>
+        <option value="toyota">Toyota</option>
+        <option value="honda">Honda</option>
+        <option value="nissan">Nissan</option>
+    </select>
+    
+    <button onclick="Info()">Показать информацию</button>
+    
+    <div id="result"></div>
+
+
+
+    <h3>Добавить машину</h3>
+<p>Марка:</p> <input type="text" id="brand"><br>
+<p>Модель:</p> <input type="text" id="model"><br>
+<button onclick="addCar()">Добавить</button>
+
+<h3>Список машин</h3>
+<div id="carList"></div>
+
+<button onclick="showCount()">Посчитать</button>
+<div id="result"></div>
+
+
+    <script>
+        const cars = {
+            toyota: "Toyota - надежные автомобили. Модели: Camry, Corolla, Supra",
+            honda: "Honda - инновационные технологии. Модели: Civic, Accord, CR-V", 
+            nissan: "Nissan - спортивный характер. Модели: Qashqai, X-Trail, GT-R"
+        };
+
+        function Info() {
+            const select = document.getElementById('carSelect');
+            const car = select.value;
+            const result = document.getElementById('result');
+            
+            const upperName = car.toUpperCase();
+            
+            const now = new Date();
+            const time = now.getHours() + ":" + now.getMinutes();
+
+            result.innerHTML = `
+                <h3>${upperName}</h3>
+                <p>${cars[car]}</p>
+                <p><small>Запрос выполнен в ${time}</small></p>`;
+        }
+
+
+
+        let cars2 = [];
+
+        function addCar() {
+        let brand = document.getElementById('brand').value;
+        let model = document.getElementById('model').value;
+        cars2.push(brand + " " + model);
+        showCars();
+        }
+// Показать все машины
+        function showCars() {
+            let list = "";
+            for(let i = 0; i < cars2.length; i++) {
+            list += cars2[i] + "<br>";
+            }
+            document.getElementById('carList').innerHTML = list;
+        }
+// Посчитать сколько машин
+        function showCount() {
+            document.getElementById('result').innerHTML = "Всего машин: " + cars2.length;
+        }
+    </script>
+    
+</body>
+</html>
